@@ -30,7 +30,8 @@ export default function QuantityInput() {
     setQuantity(Number(e.target.value))
   }
   const handleAddToCart = () => {
-    dispatch({ type: salesSlice.actions.addProduct.type, payload: { ...selectedProduct, quantity } });
+    if (selectedProduct === null) return;
+    dispatch(salesSlice.actions.addProduct({ product: selectedProduct, quantity, discount: 0 }));
     handleClose();
   }
   return (

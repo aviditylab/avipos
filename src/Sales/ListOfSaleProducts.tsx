@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks"
-import SaleProductData from "./SaleProductCard";
+import SaleProductCard from "./SaleProductCard";
 
 export default function ListOfSaleProducts() {
   const productsIsFetched = useAppSelector(state => state.products.isFetched);
@@ -13,7 +13,7 @@ export default function ListOfSaleProducts() {
   return (
     <div className="w-full flex flex-col space-y-2 p-2">
       {products.map((item, index) => (
-        <SaleProductData key={index} product={item} />
+        <SaleProductCard key={index} product={item} />
       ))}
     </div>
   )

@@ -19,13 +19,13 @@ export default function SaleProductCard({ product }: { product: ProductTypeSeria
         />
         <CardContent
           className=" flex-1 flex flex-col justify-between">
-          <Typography variant="h5" sx={{ color: 'text.secondary' }}>
+          <Typography variant="h6" sx={{ color: 'text.secondary' }} className=" text-center">
             {product.name}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }} className=" text-center">
             {product.description}
           </Typography>
-          <Typography variant="h5" sx={{ color: 'text.secondary' }}>
+          <Typography variant="h5" className=" text-green-700 text-center">
             ${product.price}
           </Typography>
           <Button variant="contained" color="primary" className="w-full" onClick={handleClick}>
