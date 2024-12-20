@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../Product/ProductCard";
 import AddToSales from "./AddToSales";
 import { Button, Col, FlexboxGrid, Heading, PanelGroup, VStack } from 'rsuite';
@@ -6,6 +6,9 @@ import { Trash } from "@rsuite/icons";
 import SalesItem from "./SalesItem";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { salesActions } from "./SalesSlice";
+import ListOfSaleProducts from "./ListOfSaleProducts";
+import QuantityInput from "./QuantityInput";
+import Checkout from "./Checkout";
 
 export default function Sales() {
   const sales = useAppSelector(state => state.sales);
@@ -16,13 +19,24 @@ export default function Sales() {
     if (productsIsFetched) return;
     dispatch({ type: 'PRODUCT_FETCH_REQUESTED' });
   }, []);
-  const handleCheckout = async () => {
-    if (sales.sales.items.length === 0) return;
-    dispatch({ type: 'CHECKOUT_SALES' });
+  const [isCheckoutPage, setIsCheckoutPage] = useState(false);
+  const handleShowCheckoutPage = () => {
+    setIsCheckoutPage(true);
   }
   return (
-    <div>
-      <AddToSales />
+    <div className=" my-16">
+      <Checkout isCheckoutPage={isCheckoutPage} setIsCheckoutPage={setIsCheckoutPage} />
+
+      {
+        !isCheckoutPage && (
+          <>
+            <ListOfSaleProducts />
+            <QuantityInput />
+          </>
+        )
+      }
+
+      {/* <AddToSales />
       <FlexboxGrid>
         <FlexboxGrid.Item as={Col} colspan={24} md={18} order={2}>
           <PanelGroup>
@@ -70,7 +84,7 @@ export default function Sales() {
             <Button onClick={handleCheckout} appearance="primary" style={{ width: '100%' }}>Checkout</Button>
           </VStack>
         </FlexboxGrid.Item>
-      </FlexboxGrid>
+      </FlexboxGrid> */}
     </div>
   )
 }
